@@ -14,6 +14,32 @@ if (!localStorage.todos) {
 const todoListEl = document.getElementById('todoList')
 const addTodoFormEl = document.getElementById('addTodoForm')
 
+
+
+
+addTodoFormEl.addEventListener(`click`, e =>{
+    const optionValue = e.target.value
+    switch (optionValue) {
+        case `1`:
+            const classNameNew = Array.from(todoListEl.querySelectorAll(`.new`))
+            const arrTodo = Array.from(todoListEl)
+            arrTodo.push(...classNameNew)
+            console.log(arrTodo);
+            break;
+        case `2`:
+            const classNameProcess = todoListEl.querySelectorAll(`.process`)
+            console.log(classNameProcess);
+            break;
+        case `3`:
+            const classNameComplete = todoListEl.querySelectorAll(`.complete`)
+            console.log(classNameComplete);;
+                break;
+    }
+})
+
+
+
+
 renderTodoList(todoListEl, todosActions({ type: 'GET' }))
 
 addTodoFormEl.addEventListener('submit', event => {
@@ -73,18 +99,6 @@ function todosActions(action) {
     }
 }
 
-// function getNewTodoStatus(currentStatus) {
-//     switch (currentStatus) {
-//         case 1:
-//             return 2
-//         case 2:
-//             return 3
-//         case 3:
-//             return 3
-//         default:
-//             throw new Error(`Unknown currentStatus! (" ${currentStatus} ")`)
-//     }
-// }
 
 function determineTodoStatus(statusTermin) {
     switch (statusTermin) {
@@ -112,6 +126,7 @@ function Todo(todos, title, text) {
 
 function renderTodoList(todoListEl, todos) {
     todoListEl.innerHTML = createTodoListHTML(todos).join(``)
+    console.log(todos);
 }
 
 function createTodoListHTML(todos) {
@@ -131,9 +146,6 @@ function createTodoHTML(todo) {
     </div>
   </div>`
 }
-
-
-
 
 
 
